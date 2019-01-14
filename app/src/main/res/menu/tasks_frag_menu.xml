@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <item
+        android:id="@+id/tasks_filtering_menu"
+        android:icon="@drawable/ic_filter_list_24dp"
+        android:title="Filter"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/tasks_insert_fakes_menu"
+        android:icon="@drawable/ic_add_24dp"
+        android:title="Insert Fakes" />
+
+    <item android:id="@+id/tasks_new_menu"
+        android:icon="@drawable/ic_add_24dp"
+        android:title="New to-do"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/tasks_refresh_menu"
+        android:icon="@drawable/ic_refresh_24dp"
+        android:title="Refresh"
+        app:showAsAction="ifRoom" />
+
+
+</menu>

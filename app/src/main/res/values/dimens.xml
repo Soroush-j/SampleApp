@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="recycleview_padding">16dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="task_item_padding">8dp</dimen>
+    <dimen name="checkbox_margin_right">16dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+</resources>

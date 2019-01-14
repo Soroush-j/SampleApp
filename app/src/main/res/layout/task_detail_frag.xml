@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="model"
+            type="com.example.sjavaherian.myapp.task.ui.taskdetail.TaskDetailViewModel" />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/task_detail_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <include layout="@layout/app_toolbar" />
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:id="@+id/task_detail_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/task_detail_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{model.title}"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    tools:text="Title" />
+
+                <Switch
+                    android:id="@+id/task_detail_state"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:onClick="@{(view)->model.updateTask(view)}"
+                    android:checked="@{model.active}"
+                    android:gravity="center"
+                    tools:checked="true" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/task_detail_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/task_detail_top"
+                android:layout_marginTop="8dp"
+                android:gravity="top"
+                android:lines="4"
+                android:text="@{model.desc}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                tools:text="TO-DO details" />
+
+        </RelativeLayout>
+
+        <android.support.design.button.MaterialButton
+            android:id="@+id/open_edit_task_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:onClick="@{()->model.openTaskEditFragment()}"
+            android:background="@drawable/button_background"
+            android:text="Edit"
+            android:textAllCaps="false"
+            android:textColor="@color/secondaryTextColor"
+            app:icon="@drawable/ic_edit_24dp"
+            app:layout_anchor="@id/relativeLayout"
+            app:layout_anchorGravity="right|bottom" />
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>
