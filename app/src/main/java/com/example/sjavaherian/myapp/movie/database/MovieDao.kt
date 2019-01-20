@@ -23,6 +23,9 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE id= :movieId")
     fun getMovieByIdLive(movieId: Int): LiveData<Movie>
 
+    @Query("SELECT * FROM movie WHERE title= :name")
+    fun getMovieByName(name: String):List<Movie>?
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun saveMovie(movie: Movie)
 

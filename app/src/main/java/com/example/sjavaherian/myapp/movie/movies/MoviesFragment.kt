@@ -1,15 +1,14 @@
 package com.example.sjavaherian.myapp.movie.movies
 
+import android.app.SearchManager
+import android.app.Service
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.Toolbar
+import android.support.v7.widget.*
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
@@ -25,12 +24,13 @@ import kotlinx.android.synthetic.main.movies_fragment.*
 import javax.inject.Inject
 
 class MoviesFragment : Fragment() {
-    // todo: save the selected genre when closing this fragment. Will be implemented after adding support for database.
-    // todo: save genres in a table
+    // todo: save the selected genre when closing this fragment
+    // todo: save genres in db
     // todo: check integrity of genres with server at the beginning.
-    companion object {
-        val TAG: String = "tag MoviesFragment"
+    // todo: upgrade to androidx.room to take advantage of new full-text search feature.
 
+    companion object {
+        private val TAG: String = "tag MoviesFragment"
         fun newInstance() = MoviesFragment()
     }
 
@@ -75,7 +75,6 @@ class MoviesFragment : Fragment() {
             adapter = mAdapter
             addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         }
-
         movies_loading_indicator.visibility = View.VISIBLE
     }
 
@@ -88,7 +87,7 @@ class MoviesFragment : Fragment() {
             val size = pagedList?.size
             if (size == null || size <= 0) {
                 mViewModel.updateLoadingState("Loading failed.", View.VISIBLE)
-            } else mViewModel.updateLoadingState("Loading failed.", View.GONE)
+            } else mViewModel.updateLoadingState("Loading Successful.", View.GONE)
 
             mAdapter.submitList(pagedList)
         })
@@ -114,7 +113,7 @@ class MoviesFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
         super.onCreateOptionsMenu(menu, inflater)
 
-        inflater?.inflate(R.menu.movie_genres_menu, menu)
+        inflater?.inflate(R.menu.menu_movies_frag, menu)
 
         val spinner = menu?.findItem(R.id.menu_movie_genres)?.actionView as Spinner
         spinner.adapter = mSpinnerAdapter
@@ -131,5 +130,9 @@ class MoviesFragment : Fragment() {
                 mViewModel.loadGenre(genre.id)
             }
         }
+
+        val searchView = menu.findItem(R.id.menu_movie_search)?.actionView as SearchView
+        val searchManager = activity?.getSystemService(Service.SEARCH_SERVICE) as SearchManager
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
     }
 }

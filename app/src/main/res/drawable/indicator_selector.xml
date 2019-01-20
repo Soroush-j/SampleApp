@@ -3,6 +3,6 @@
 
     <item android:drawable="@drawable/selected_indicator" android:state_selected="true" />
 
-    <item android:drawable="@drawable/default_indicator" />
+    <item android:drawable="@drawable/indicator_default" />
 
 </selector>

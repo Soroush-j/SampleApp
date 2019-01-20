@@ -6,9 +6,14 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupWithNavController
 import com.example.sjavaherian.myapp.R
 import com.example.sjavaherian.myapp.databinding.MovieDetailsFragmentBinding
 import com.example.sjavaherian.myapp.movie.database.Movie
@@ -25,14 +30,18 @@ class MovieDetailsFragment : Fragment() {
 //            arguments = Bundle().apply { putInt(ARG_ID, id) }
 //        }
     }
-//todo: loading indicator while loading details
+    //todo: save images in database
+    // todo: change font size dynamically
+
     @Inject
     lateinit var mMovieBannerAdapter: MovieBannerAdapter
 
     @Inject
     lateinit var mViewModel: MovieDetailsViewModel
 
-    lateinit var mBinding: MovieDetailsFragmentBinding
+    private lateinit var mBinding: MovieDetailsFragmentBinding
+
+    private lateinit var mNavController: NavController
 
     lateinit var toolbar: Toolbar
     override fun onAttach(context: Context?) {
@@ -48,15 +57,25 @@ class MovieDetailsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         mBinding = MovieDetailsFragmentBinding.inflate(layoutInflater, container, false)
+        mBinding.apply { viewModel = mViewModel }
+
+        mNavController = findNavController()
+
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        toolbar = view.findViewById(R.id.movie_details_toolbar)
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        toolbar.title = ""
+//        toolbar = view.findViewById(R.id.movie_details_toolbar)
+//        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+//        toolbar.title = ""
+
+        movie_details_collapsing_toolbar.setupWithNavController(
+            movie_details_toolbar, mNavController,
+            AppBarConfiguration(mNavController.graph)
+        )
+        movie_details_toolbar.setupWithNavController(mNavController, AppBarConfiguration(mNavController.graph))
 
         movie_details_viewpager.adapter = mMovieBannerAdapter
         movie_details_indicator.setupWithViewPager(movie_details_viewpager)
@@ -67,9 +86,12 @@ class MovieDetailsFragment : Fragment() {
 
         mViewModel.mMovie.observe(this, Observer<Movie> { details ->
             mBinding.movie = details
-            details?.images?.let { mMovieBannerAdapter.addImagesUrl(it) }
+            mMovieBannerAdapter.addImagesUrl(details)
+            if (details?.images == null) movie_details_indicator.visibility = View.INVISIBLE
+            Log.d(TAG, "title: ${details?.title}")
             details?.title?.let {
-                toolbar.title = it
+                //                toolbar.title = it
+                movie_details_collapsing_toolbar.title = it
             }
         })
     }

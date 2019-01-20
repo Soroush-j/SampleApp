@@ -8,7 +8,7 @@ import android.arch.persistence.room.PrimaryKey
 @Entity(tableName = "movie")
 data class Movie(
     @PrimaryKey(autoGenerate = true)
-    @ColumnInfo(name = "key") val key: Int?,
+    @ColumnInfo(name = "rowid") val key: Int?,
 
     @ColumnInfo(name = "id") val id: Int?,
     @ColumnInfo(name = "title") val title: String?,

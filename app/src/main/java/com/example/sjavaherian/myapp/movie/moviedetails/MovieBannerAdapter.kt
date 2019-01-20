@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.example.sjavaherian.myapp.R
 import com.example.sjavaherian.myapp.common.loge
+import com.example.sjavaherian.myapp.movie.database.Movie
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
@@ -23,23 +24,29 @@ class MovieBannerAdapter(private val context: Context) : PagerAdapter() {
     override fun instantiateItem(container: ViewGroup, position: Int): Any {
         val imageView = ImageView(context)
 
-        val picasso = Picasso.get()
-        picasso.setIndicatorsEnabled(true)
-        picasso.isLoggingEnabled = true
+        Log.d(TAG, "item count: $count")
 
-        picasso.load(images[position])
-            .fit()
-            .centerCrop()
-            .placeholder(R.drawable.ic_movie)
-            .into(imageView, object : Callback {
-                override fun onSuccess() {
-                    Log.d(TAG, "picasso loaded the image!")
-                }
+        if (images[0] == "placeHolder") {
+            val res = context.resources
+            imageView.setImageDrawable(res.getDrawable(R.drawable.ic_movie, null))
+        } else {
+            val picasso = Picasso.get()
+            picasso.setIndicatorsEnabled(true)
+            picasso.isLoggingEnabled = true
 
-                override fun onError(e: Exception?) {
-                    loge(TAG, "picasso failed at loading image!" + e?.stackTrace)
-                }
-            })
+            picasso.load(images[position])
+                .fit()
+                .centerCrop()
+                .placeholder(R.drawable.ic_movie)
+                .into(imageView, object : Callback {
+                    override fun onSuccess() {
+                        Log.d(TAG, "picasso loaded the image!")
+                    }
+                    override fun onError(e: Exception?) {
+                        loge(TAG, "picasso failed at loading image!" + e?.stackTrace)
+                    }
+                })
+        }
 
         container.addView(imageView)
         return imageView
@@ -49,9 +56,10 @@ class MovieBannerAdapter(private val context: Context) : PagerAdapter() {
         container.removeView(`object` as View)
     }
 
-    fun addImagesUrl(urls: List<String>) {
+    fun addImagesUrl(movie: Movie?) {
         images.clear()
-        images.addAll(urls)
+        val urls = movie?.images
+        if (urls != null && urls.isNotEmpty()) images.addAll(urls) else images.add("placeHolder")
         notifyDataSetChanged()
     }
 }

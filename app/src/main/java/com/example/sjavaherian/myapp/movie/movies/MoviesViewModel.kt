@@ -66,6 +66,7 @@ class MoviesViewModel(
     }
 
     fun loadGenre(id: Int) {
+        Log.d(TAG, "loading specific genres is not supported for now.")
 
 //        mMoviesApiEndPoint.getMoviesByGenre(id)
 //            .enqueue(object : Callback<GenreResponse> {
@@ -85,7 +86,7 @@ class MoviesViewModel(
     }
 
     fun onStop() {
-        Log.d(TAG,"view model onStop called.")
+        Log.d(TAG, "view model onStop called.")
         mBoundaryCallback.disposable.clear()
     }
 

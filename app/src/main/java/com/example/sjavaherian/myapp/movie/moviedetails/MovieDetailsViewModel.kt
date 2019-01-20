@@ -2,7 +2,9 @@ package com.example.sjavaherian.myapp.movie.moviedetails
 
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
+import android.databinding.ObservableInt
 import android.util.Log
+import android.view.View
 import com.example.sjavaherian.myapp.movie.database.Movie
 import com.example.sjavaherian.myapp.movie.database.MovieDao
 import com.example.sjavaherian.myapp.movie.moviedetails.network.MovieDetailsApiEndpoint
@@ -27,6 +29,9 @@ class MovieDetailsViewModel(
     private val mDisposable = CompositeDisposable()
     private var mId: Int = 0
 
+    val scrollViewVisibility = ObservableInt(View.INVISIBLE)
+    val loading = ObservableInt(View.VISIBLE)
+
     val mMovie = MutableLiveData<Movie>()
 //            = mMovieDao.getMovieByIdLive(mId)
 //    val movie: LiveData<Movie>
@@ -42,6 +47,7 @@ class MovieDetailsViewModel(
                 .distinctUntilChanged { old, new -> old == new }
                 .doOnNext { checkDatabaseResult(id, it) }
                 .doOnComplete { Log.d(TAG, "fetching movie detail from database has just completed.") }
+                .doOnError { Log.e(TAG, it.message, it) }
                 .subscribe()
         )
     }
@@ -50,7 +56,11 @@ class MovieDetailsViewModel(
     private fun checkDatabaseResult(id: Int, m: Movie): Boolean {
         mMovie.value = m
         mKey = m.key!!
-        return if (m.fullyLoaded) true else {
+        return if (m.fullyLoaded) {
+            scrollViewVisibility.set(View.VISIBLE)
+            loading.set(View.GONE)
+            true
+        } else {
             getMovieFromServer(id)
             false
         }
@@ -73,7 +83,11 @@ class MovieDetailsViewModel(
                             .subscribeOn(Schedulers.io())
                             .map { mMovieDao.updateMovie(m) }
                             .observeOn(AndroidSchedulers.mainThread())
-                            .doOnComplete { Log.d(TAG, "movie from server is successfully saved.") }
+                            .doOnComplete {
+                                Log.d(TAG, "movie from server is successfully saved.")
+                                loading.set(View.GONE)
+                                scrollViewVisibility.set(View.VISIBLE)
+                            }
                             .subscribe()
                     )
                 }

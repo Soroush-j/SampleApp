@@ -2,10 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/menu_movie_search"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="Search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        app:showAsAction="collapseActionView|always"/>
+
     <item
         android:id="@+id/menu_movie_genres"
         android:icon="@drawable/ic_filter_list_24dp"
         android:title="Genres"
         app:actionViewClass="android.widget.Spinner"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom" />
+
 </menu>

@@ -9,12 +9,17 @@
         <variable
             name="movie"
             type="com.example.sjavaherian.myapp.movie.database.Movie" />
+
+        <variable
+            name="viewModel"
+            type="com.example.sjavaherian.myapp.movie.moviedetails.MovieDetailsViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:id="@+id/movie_details_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context=".movie.moviedetails.MovieDetailsFragment">
 
         <android.support.design.widget.AppBarLayout
@@ -27,9 +32,12 @@
                 android:id="@+id/movie_details_collapsing_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                app:collapsedTitleGravity="left"
                 app:contentScrim="@color/secondaryColor"
+                app:expandedTitleGravity="left|bottom"
                 app:expandedTitleTextAppearance="@style/TextAppearance.AppCompat.Title"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed"
+                tools:title="Shawshank">
 
                 <FrameLayout
                     android:layout_width="match_parent"
@@ -55,16 +63,26 @@
                     android:id="@+id/movie_details_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?android:attr/actionBarSize"
+                    android:gravity="left"
                     app:layout_collapseMode="parallax"
                     app:popupTheme="@style/AppTheme.PopUpOverlay" />
             </android.support.design.widget.CollapsingToolbarLayout>
 
         </android.support.design.widget.AppBarLayout>
 
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.loading}" />
+
         <ScrollView
+            android:id="@+id/movie_details_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:nestedScrollingEnabled="true"
+            android:visibility="@{viewModel.scrollViewVisibility}"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
@@ -72,15 +90,15 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/movie_details_title"
-                    style="@style/DetailsAppearance"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{movie.title()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
-                    tools:text="Title: God Father 2" />
+                <!--<TextView-->
+                <!--android:id="@+id/movie_details_title"-->
+                <!--style="@style/DetailsAppearance"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:text="@{movie.title()}"-->
+                <!--android:textSize="15sp"-->
+                <!---->
+                <!--tools:text="Title: God Father 2" />-->
 
                 <TextView
                     android:id="@+id/movie_details_plot"
@@ -88,8 +106,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="@{movie.plot()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
+
                     tools:text="The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son." />
 
                 <TextView
@@ -98,8 +116,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.director()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="Francis Ford Coppola" />
 
                 <TextView
@@ -108,8 +125,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.runtime()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="175 min" />
 
                 <TextView
@@ -118,8 +134,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.country()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="USA" />
 
                 <TextView
@@ -128,8 +143,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.actors()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="Marlon Brando, Al Pacino, James Caan, Richard S. Castellano" />
 
                 <TextView
@@ -138,8 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.awards()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="Won 3 Oscars. Another 23 wins &amp; 27 nominations." />
 
                 <TextView
@@ -148,8 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.imdbRating()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="9.7" />
 
                 <TextView
@@ -158,8 +170,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.metascore()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="97" />
 
                 <TextView
@@ -168,17 +179,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{movie.imdbVotes()}"
-                    app:autoSizeMinTextSize="20sp"
-                    app:autoSizeTextType="uniform"
+                    android:textSize="15sp"
                     tools:text="1,186,027" />
-
-                <!--<TextView-->
-                <!--android:mId="@+mId/movie_details_"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="match_parent"-->
-                <!--android:text="@{movie.}"-->
-                <!--tools:text="" />-->
-
             </LinearLayout>
         </ScrollView>
 
