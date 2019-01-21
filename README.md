@@ -12,3 +12,5 @@ Although Android Jetpack hasn't been used yet, it will be in the near future. I'
 [Retrofit 2](https://github.com/square/retrofit), 
 [RxJava 2](https://github.com/ReactiveX/RxJava), 
 [Picasso](https://github.com/square/picasso)
+
+The API that was used for the movies' information is from here: [Movies api](http://moviesapi.ir/) thanks to Abbas Oveissi.
