@@ -1,14 +1,15 @@
 package com.example.sjavaherian.myapp.movie.movies
 
-import android.app.SearchManager
-import android.app.Service
 import android.arch.lifecycle.Observer
 import android.content.Context
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.*
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.Toolbar
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
@@ -28,6 +29,7 @@ class MoviesFragment : Fragment() {
     // todo: save genres in db
     // todo: check integrity of genres with server at the beginning.
     // todo: upgrade to androidx.room to take advantage of new full-text search feature.
+    // todo: add scroll bar to recycler view.
 
     companion object {
         private val TAG: String = "tag MoviesFragment"
@@ -60,11 +62,14 @@ class MoviesFragment : Fragment() {
         mNavController = findNavController()
         mViewModel.start()
 
+        Log.d(TAG, "onCreateView")
+
         return mBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d(TAG, "onViewCreated")
 
         val toolbar = view.findViewById<Toolbar>(R.id.toolbar)
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
@@ -80,6 +85,7 @@ class MoviesFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
+        Log.d(TAG, "onStart")
 
         mViewModel.movies.observe(this, Observer { pagedList ->
             movies_loading_indicator.visibility = View.INVISIBLE
@@ -103,10 +109,13 @@ class MoviesFragment : Fragment() {
                 )
             }
         })
+
+        mAdapter.positionLive.observe(this, Observer { })
     }
 
     override fun onStop() {
         super.onStop()
+        Log.d(TAG, "onStop")
         mViewModel.onStop()
     }
 
@@ -130,9 +139,5 @@ class MoviesFragment : Fragment() {
                 mViewModel.loadGenre(genre.id)
             }
         }
-
-        val searchView = menu.findItem(R.id.menu_movie_search)?.actionView as SearchView
-        val searchManager = activity?.getSystemService(Service.SEARCH_SERVICE) as SearchManager
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(activity?.componentName))
     }
 }

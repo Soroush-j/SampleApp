@@ -76,9 +76,4 @@
     <!--android:label="Search"-->
     <!--tools:layout="@layout/search_fragment" />-->
 
-    <activity
-        android:id="@+id/nav_search_activity"
-        android:name="com.example.sjavaherian.myapp.main.SearchActivity"
-        android:label="search_activity"
-        tools:layout="@layout/search_activity" />
 </navigation>

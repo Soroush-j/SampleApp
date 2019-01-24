@@ -21,8 +21,6 @@ import com.example.sjavaherian.myapp.task.inject
 import javax.inject.Inject
 
 class AddEditTaskFragment : Fragment() {
-    //todo: back button doesn't save the changes!
-    //todo: up(home) button doesn't save the changes!
     companion object {
         const val ARGUMENT_ID = "ARG_ID"
         const val NO_ID = "no mId"

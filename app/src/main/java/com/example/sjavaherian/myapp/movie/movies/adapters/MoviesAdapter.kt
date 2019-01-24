@@ -1,9 +1,11 @@
 package com.example.sjavaherian.myapp.movie.movies.adapters
 
+import android.arch.lifecycle.MutableLiveData
 import android.arch.paging.PagedListAdapter
 import android.databinding.DataBindingUtil
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.example.sjavaherian.myapp.R
@@ -11,12 +13,13 @@ import com.example.sjavaherian.myapp.common.SingleLiveEvent
 import com.example.sjavaherian.myapp.databinding.MovieItemBinding
 import com.example.sjavaherian.myapp.movie.database.Movie
 import com.example.sjavaherian.myapp.movie.movies.MovieClickListener
-import com.example.sjavaherian.myapp.movie.movies.MoviesFragment
 import com.squareup.picasso.Picasso
 
-class MoviesAdapter() :PagedListAdapter<Movie, MoviesAdapter.ViewHolder>(DIFF_ITEM) {
+class MoviesAdapter() : PagedListAdapter<Movie, MoviesAdapter.ViewHolder>(DIFF_ITEM) {
 
     val openMovieDetailsEvent = SingleLiveEvent<Int>()
+    val positionLive = MutableLiveData<Int>()
+    private val TAG = "tag MoviesAdapter"
 
     companion object {
         val DIFF_ITEM = object : DiffUtil.ItemCallback<Movie>() {
@@ -38,6 +41,8 @@ class MoviesAdapter() :PagedListAdapter<Movie, MoviesAdapter.ViewHolder>(DIFF_IT
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         // todo: do something if item is null?!
+//        Log.d(TAG, "onBindViewHolder, $position")
+        positionLive.value = position
         val movie = getItem(position)
         holder.bind(movie)
     }
@@ -45,6 +50,7 @@ class MoviesAdapter() :PagedListAdapter<Movie, MoviesAdapter.ViewHolder>(DIFF_IT
     inner class ViewHolder(private val mBinding: MovieItemBinding) : RecyclerView.ViewHolder(mBinding.root) {
 
         fun bind(movie: Movie?) {
+//            Log.d(TAG, "ViewHolder, $adapterPosition")
             mBinding.movie = movie
 
             mBinding.listener = object : MovieClickListener {
@@ -52,7 +58,6 @@ class MoviesAdapter() :PagedListAdapter<Movie, MoviesAdapter.ViewHolder>(DIFF_IT
                     openMovieDetailsEvent.value = movie.id
                 }
             }
-
             val picasso = Picasso.get()
             picasso.setIndicatorsEnabled(true)
             picasso
@@ -64,4 +69,6 @@ class MoviesAdapter() :PagedListAdapter<Movie, MoviesAdapter.ViewHolder>(DIFF_IT
             mBinding.executePendingBindings()
         }
     }
+
+
 }
