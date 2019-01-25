@@ -1,5 +1,6 @@
 package com.example.sjavaherian.myapp.movie.movies.network.pojo
 
+import com.example.sjavaherian.myapp.movie.database.Movie
 import com.google.gson.annotations.SerializedName
 
 data class MovieRetro(
@@ -14,4 +15,17 @@ data class MovieRetro(
 ) {
 
     fun description(): String = "Year: $year IMDB: $imdbRating GenreRetro: $genres Country: $country"
+
+    fun convertToMovie(): Movie {
+        return Movie(
+            this.id,
+            this.title,
+            this.poster,
+            this.year,
+            this.country,
+            this.imdbRating,
+            this.genres,
+            this.images
+        )
+    }
 }

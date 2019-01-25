@@ -10,6 +10,8 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
@@ -22,14 +24,12 @@ import com.example.sjavaherian.myapp.movie.inject
 import com.example.sjavaherian.myapp.movie.movies.adapters.MoviesAdapter
 import com.example.sjavaherian.myapp.movie.movies.adapters.SpinnerAdapter
 import kotlinx.android.synthetic.main.movies_fragment.*
+import org.jetbrains.anko.AnkoLogger
 import javax.inject.Inject
 
-class MoviesFragment : Fragment() {
+class MoviesFragment : Fragment(), AnkoLogger {
     // todo: save the selected genre when closing this fragment
-    // todo: save genres in db
-    // todo: check integrity of genres with server at the beginning.
     // todo: upgrade to androidx.room to take advantage of new full-text search feature.
-    // todo: add scroll bar to recycler view.
 
     companion object {
         private val TAG: String = "tag MoviesFragment"
@@ -47,6 +47,8 @@ class MoviesFragment : Fragment() {
 
     private lateinit var mBinding: MoviesFragmentBinding
     private lateinit var mNavController: NavController
+
+    private var mGenre: String = "ALL"
 
     override fun onAttach(context: Context?) {
         super.onAttach(context)
@@ -87,14 +89,27 @@ class MoviesFragment : Fragment() {
         super.onStart()
         Log.d(TAG, "onStart")
 
+
         mViewModel.movies.observe(this, Observer { pagedList ->
             movies_loading_indicator.visibility = View.INVISIBLE
+
             Log.d(TAG, "paged list size: " + pagedList?.size)
+
             val size = pagedList?.size
             if (size == null || size <= 0) {
                 mViewModel.updateLoadingState("Loading failed.", View.VISIBLE)
             } else mViewModel.updateLoadingState("Loading Successful.", View.GONE)
 
+            if (mGenre != "All") {
+                pagedList?.filter { movie ->
+                    Log.d(TAG, "filter: " + movie?.id?.toString())
+                    movie?.genres?.let {
+                        Log.d(TAG, "contains? ${it.contains(mGenre)}")
+                        return@filter it.contains(mGenre)
+                    }
+                    return@filter false
+                }
+            }
             mAdapter.submitList(pagedList)
         })
 
@@ -109,8 +124,6 @@ class MoviesFragment : Fragment() {
                 )
             }
         })
-
-        mAdapter.positionLive.observe(this, Observer { })
     }
 
     override fun onStop() {
@@ -124,7 +137,9 @@ class MoviesFragment : Fragment() {
 
         inflater?.inflate(R.menu.menu_movies_frag, menu)
 
-        val spinner = menu?.findItem(R.id.menu_movie_genres)?.actionView as Spinner
+
+        // todo: change to popup menu.
+        val spinner = menu?.findItem(R.id.menu_movies_genres)?.actionView as Spinner
         spinner.adapter = mSpinnerAdapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -134,10 +149,16 @@ class MoviesFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val genre = mSpinnerAdapter.getItem(position)
-                Log.d(TAG, genre.toString())
+                mGenre = genre.name
+                Log.d(TAG, genre.name)
                 Log.d(TAG, "genre id: ${genre.id}")
-                mViewModel.loadGenre(genre.id)
             }
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

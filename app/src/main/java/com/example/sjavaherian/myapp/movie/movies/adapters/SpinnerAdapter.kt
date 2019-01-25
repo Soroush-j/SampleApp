@@ -7,27 +7,27 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import com.example.sjavaherian.myapp.R
-import com.example.sjavaherian.myapp.movie.movies.network.pojo.GenreRetro
+import com.example.sjavaherian.myapp.movie.database.Genre
 
-class SpinnerAdapter(activity: Context) : ArrayAdapter<GenreRetro>(activity, 0) {
+class SpinnerAdapter(activity: Context) : ArrayAdapter<Genre>(activity, 0) {
 
-    private var mGenres = mutableListOf<GenreRetro>(GenreRetro(-1, "Loading"))
+    private var mGenres = mutableListOf<Genre>(Genre(-1, "Loading"))
     private var mLayoutInflater: LayoutInflater = LayoutInflater.from(activity)
 
-    constructor(context: Context, objects: List<GenreRetro>) : this(context) {
+    constructor(context: Context, objects: List<Genre>) : this(context) {
         mGenres.clear()
         mGenres.addAll(objects)
         notifyDataSetChanged()
     }
 
-    fun addAll(genres: List<GenreRetro>) {
+    fun addAll(genres: List<Genre>) {
         mGenres.clear()
-        mGenres.add(0, GenreRetro(0, "All"))
+        mGenres.add(0, Genre(0, "All"))
         mGenres.addAll(genres)
         notifyDataSetChanged()
     }
 
-    override fun getItem(position: Int): GenreRetro = mGenres[position]
+    override fun getItem(position: Int): Genre = mGenres[position]
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View =
         createItemView(convertView, parent, position)

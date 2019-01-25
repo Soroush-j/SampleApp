@@ -54,6 +54,9 @@
         <action
             android:id="@+id/action_tasks_to_add_edit_task"
             app:destination="@id/nav_add_edit_task_fragment" />
+        <action
+            android:id="@+id/action_tasks_to_search"
+            app:destination="@id/nav_search_fragment" />
     </fragment>
 
     <fragment
@@ -69,11 +72,10 @@
             android:id="@+id/action_add_edit_task_pop_tasks"
             app:popUpTo="@id/nav_tasks_fragment" />
     </fragment>
-
-    <!--<fragment-->
-    <!--android:id="@+id/nav_search_fragment"-->
-    <!--android:name="com.example.sjavaherian.myapp.main.SearchFragment"-->
-    <!--android:label="Search"-->
-    <!--tools:layout="@layout/search_fragment" />-->
+    <fragment
+        android:id="@+id/nav_search_fragment"
+        android:name="com.example.sjavaherian.myapp.movie.search.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/search_frag"/>
 
 </navigation>

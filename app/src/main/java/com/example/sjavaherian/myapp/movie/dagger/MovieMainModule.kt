@@ -3,6 +3,7 @@ package com.example.sjavaherian.myapp.movie.dagger
 import android.app.Application
 import com.example.sjavaherian.myapp.data.AppDatabase
 import com.example.sjavaherian.myapp.movie.ViewModelFactoryMovie
+import com.example.sjavaherian.myapp.movie.database.GenreDao
 import com.example.sjavaherian.myapp.movie.database.MovieDao
 import com.example.sjavaherian.myapp.movie.moviedetails.network.MovieDetailsApiEndpoint
 import com.example.sjavaherian.myapp.movie.moviedetails.network.MovieDetailsApiEndpoint.Companion.MOVIE_DETAILS_ENDPOINT
@@ -26,9 +27,10 @@ class MovieMainModule {
         @Named(MOVIES_ENDPOINT) moviesEndPoint: MoviesApiEndPoint,
         @Named(MOVIE_DETAILS_ENDPOINT) detailsEndpoint: MovieDetailsApiEndpoint,
         movieDao: MovieDao,
+        genreDao: GenreDao,
         movieBoundaryCallback: MovieBoundaryCallback
     ): ViewModelFactoryMovie {
-        return ViewModelFactoryMovie(app, moviesEndPoint, detailsEndpoint, movieDao, movieBoundaryCallback)
+        return ViewModelFactoryMovie(app, moviesEndPoint, detailsEndpoint, movieDao,genreDao, movieBoundaryCallback)
     }
 
     @Named(MOVIE_API_RETROFIT)
@@ -52,11 +54,16 @@ class MovieMainModule {
         retrofit.create(MovieDetailsApiEndpoint::class.java)
 
     @Provides
+    fun provideMovieBoundaryCallback(
+        @Named(MOVIES_ENDPOINT) moviesEndPoint: MoviesApiEndPoint,
+        movieDao: MovieDao
+    ): MovieBoundaryCallback =
+        MovieBoundaryCallback(moviesEndPoint, movieDao)
+
+    @Provides
     fun provideMovieDao(appDatabase: AppDatabase): MovieDao = appDatabase.movieDao()
 
     @Provides
-    fun provideMovieBoundaryCallback(@Named(MOVIES_ENDPOINT) moviesEndPoint: MoviesApiEndPoint,
-                                     movieDao: MovieDao): MovieBoundaryCallback =
-        MovieBoundaryCallback(moviesEndPoint,movieDao)
+    fun provideGenreDao(appDatabase: AppDatabase): GenreDao = appDatabase.genreDao()
 
 }
