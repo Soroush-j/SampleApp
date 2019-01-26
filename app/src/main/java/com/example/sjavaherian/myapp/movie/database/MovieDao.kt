@@ -12,8 +12,8 @@ interface MovieDao {
     @Query("SELECT * FROM movie WHERE genres LIKE :genre ORDER BY id")
     fun loadByGenre(genre: String): DataSource.Factory<Int, Movie>
 
-    @Query("SELECT * FROM movie WHERE title LIKE :title ORDER BY id")
-    fun loadByTitle(title: String): DataSource.Factory<Int, Movie>
+    @Query("SELECT * FROM movie WHERE title LIKE :query ORDER BY id")
+    fun searchMovieByTitle(query: String): List<Movie>
 
     @Query("SELECT COUNT(*) FROM movie ")
     fun rowCount(): Long

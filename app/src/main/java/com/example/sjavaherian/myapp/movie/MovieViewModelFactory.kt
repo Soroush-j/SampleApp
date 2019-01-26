@@ -11,7 +11,7 @@ import com.example.sjavaherian.myapp.movie.movies.MoviesViewModel
 import com.example.sjavaherian.myapp.movie.movies.network.MovieBoundaryCallback
 import com.example.sjavaherian.myapp.movie.movies.network.MoviesApiEndPoint
 
-class ViewModelFactoryMovie(
+class MovieViewModelFactory(
     private val app: Application,
     private val moviesApiEndPoint: MoviesApiEndPoint,
     private val detailsEndpoint: MovieDetailsApiEndpoint,

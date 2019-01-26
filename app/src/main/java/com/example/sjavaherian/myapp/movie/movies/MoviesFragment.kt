@@ -10,8 +10,6 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.Log
 import android.view.*
 import android.widget.AdapterView
@@ -83,6 +81,9 @@ class MoviesFragment : Fragment(), AnkoLogger {
             addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
         }
         movies_loading_indicator.visibility = View.VISIBLE
+
+        movies_fab.setOnClickListener { findNavController().navigate(R.id.action_movies_to_search)}
+
     }
 
     override fun onStart() {
@@ -136,8 +137,6 @@ class MoviesFragment : Fragment(), AnkoLogger {
         super.onCreateOptionsMenu(menu, inflater)
 
         inflater?.inflate(R.menu.menu_movies_frag, menu)
-
-
         // todo: change to popup menu.
         val spinner = menu?.findItem(R.id.menu_movies_genres)?.actionView as Spinner
         spinner.adapter = mSpinnerAdapter

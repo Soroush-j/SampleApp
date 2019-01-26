@@ -1,11 +1,8 @@
 package com.example.sjavaherian.myapp.movie.database
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 
-@Entity(tableName = "movie")
+@Entity(tableName = "movie",indices = [Index(value = ["title"])])
 data class Movie(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "rowid") val key: Int?,

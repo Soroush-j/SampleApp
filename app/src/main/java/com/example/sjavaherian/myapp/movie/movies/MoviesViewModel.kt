@@ -70,7 +70,6 @@ class MoviesViewModel(
                 var final: List<Genre>?
 
                 final = internet?.filter { g ->
-                    Log.d(TAG, "g: $g")
                     return@filter shouldBeFiltered(g)
                 }
 

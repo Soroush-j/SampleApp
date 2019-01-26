@@ -2,7 +2,7 @@ package com.example.sjavaherian.myapp.movie.dagger
 
 import android.app.Application
 import com.example.sjavaherian.myapp.data.AppDatabase
-import com.example.sjavaherian.myapp.movie.ViewModelFactoryMovie
+import com.example.sjavaherian.myapp.movie.MovieViewModelFactory
 import com.example.sjavaherian.myapp.movie.database.GenreDao
 import com.example.sjavaherian.myapp.movie.database.MovieDao
 import com.example.sjavaherian.myapp.movie.moviedetails.network.MovieDetailsApiEndpoint
@@ -29,8 +29,8 @@ class MovieMainModule {
         movieDao: MovieDao,
         genreDao: GenreDao,
         movieBoundaryCallback: MovieBoundaryCallback
-    ): ViewModelFactoryMovie {
-        return ViewModelFactoryMovie(app, moviesEndPoint, detailsEndpoint, movieDao,genreDao, movieBoundaryCallback)
+    ): MovieViewModelFactory {
+        return MovieViewModelFactory(app, moviesEndPoint, detailsEndpoint, movieDao,genreDao, movieBoundaryCallback)
     }
 
     @Named(MOVIE_API_RETROFIT)
@@ -59,11 +59,4 @@ class MovieMainModule {
         movieDao: MovieDao
     ): MovieBoundaryCallback =
         MovieBoundaryCallback(moviesEndPoint, movieDao)
-
-    @Provides
-    fun provideMovieDao(appDatabase: AppDatabase): MovieDao = appDatabase.movieDao()
-
-    @Provides
-    fun provideGenreDao(appDatabase: AppDatabase): GenreDao = appDatabase.genreDao()
-
 }

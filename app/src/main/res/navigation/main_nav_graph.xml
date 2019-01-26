@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/movie_nav"
+    android:id="@+id/main_nav"
     app:startDestination="@id/nav_movies_fragment">
 
     <fragment
@@ -14,6 +14,9 @@
             android:id="@+id/action_movies_to_movie_details"
             app:destination="@+id/nav_movie_details_fragment"
             app:popUpTo="@+id/nav_movies_fragment" />
+        <action
+            android:id="@+id/action_movies_to_search"
+            app:destination="@id/nav_search_fragment" />
     </fragment>
 
     <fragment
@@ -54,9 +57,7 @@
         <action
             android:id="@+id/action_tasks_to_add_edit_task"
             app:destination="@id/nav_add_edit_task_fragment" />
-        <action
-            android:id="@+id/action_tasks_to_search"
-            app:destination="@id/nav_search_fragment" />
+
     </fragment>
 
     <fragment
@@ -74,8 +75,13 @@
     </fragment>
     <fragment
         android:id="@+id/nav_search_fragment"
-        android:name="com.example.sjavaherian.myapp.movie.search.SearchFragment"
-        android:label="SearchFragment"
-        tools:layout="@layout/search_frag"/>
+        tools:layout="@layout/search_frag"
+        android:name="com.example.sjavaherian.myapp.search.SearchFragment"
+        android:label="SearchFragment" >
+        <action
+            android:id="@+id/action_search_to_movie_details"
+            app:destination="@id/nav_movie_details_fragment" />
+    </fragment>
+
 
 </navigation>

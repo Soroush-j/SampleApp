@@ -1,7 +1,7 @@
 package com.example.sjavaherian.myapp.movie.moviedetails.dagger;
 
 import android.arch.lifecycle.ViewModelProviders;
-import com.example.sjavaherian.myapp.movie.ViewModelFactoryMovie;
+import com.example.sjavaherian.myapp.movie.MovieViewModelFactory;
 import com.example.sjavaherian.myapp.movie.moviedetails.MovieDetailsFragment;
 import com.example.sjavaherian.myapp.movie.moviedetails.MovieDetailsViewModel;
 import com.example.sjavaherian.myapp.movie.moviedetails.MovieBannerAdapter;
@@ -18,7 +18,7 @@ public class MovieDetailsModule {
     }
 
     @Provides
-    MovieDetailsViewModel providesMovieDetailsViewModel(ViewModelFactoryMovie factory) {
+    MovieDetailsViewModel providesMovieDetailsViewModel(MovieViewModelFactory factory) {
         return ViewModelProviders.of(mMovieDetailsFragment, factory).get(MovieDetailsViewModel.class);
     }
 
