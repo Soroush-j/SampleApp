@@ -132,16 +132,16 @@ class TasksViewModel constructor(
     }
 
     fun updateTask(check: Boolean, task: Task) {
-        val updateTask = repository.updateTask(
-            Task(task.id, task.title, task.description, check)
-        ).subscribe(
-            {
-                shortToast(
-                    getApplication(),
-                    "Task is " + (if (check) "active" else "complete")
-                )
-            },
-            { loge(TAG, it) })
+        val updateTask =
+            repository.updateTask(Task(task.id, task.title, task.description, check))
+                .doOnComplete {
+                    shortToast(
+                        getApplication(),
+                        "Task is " + (if (check) "active" else "complete")
+                    )
+                }
+                .doOnError { loge(TAG, it) }
+                .subscribe()
         disposable.add(updateTask)
         Log.d(TAG, "update task isDisposed? ${updateTask.isDisposed}")
     }

@@ -41,6 +41,7 @@ class AddEditTaskFragment : Fragment() {
 
     @Inject
     lateinit var mViewModel: AddEditTaskViewModel
+
     private lateinit var mBinding: AddEditTaskFragmentBinding
     lateinit var toolbar: Toolbar
     lateinit var mNavController: NavController

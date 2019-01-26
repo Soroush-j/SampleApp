@@ -106,7 +106,7 @@ class TasksFragment : Fragment() {
             R.id.tasks_insert_fakes_menu -> mViewModel.insertFakeTasks()
             R.id.tasks_refresh_menu -> mViewModel.loadTasks()
             R.id.tasks_filtering_menu -> showPopUpMenu()
-            R.id.tasks_new_menu -> {
+            R.id.tasks_search_menu -> {
             }
         }
         return super.onOptionsItemSelected(item)

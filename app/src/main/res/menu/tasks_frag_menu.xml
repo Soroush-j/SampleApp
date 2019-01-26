@@ -13,9 +13,9 @@
         android:icon="@drawable/ic_add_24dp"
         android:title="Insert Fakes" />
 
-    <item android:id="@+id/tasks_new_menu"
-        android:icon="@drawable/ic_add_24dp"
-        android:title="New to-do"
+    <item android:id="@+id/tasks_search_menu"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="Search"
         app:showAsAction="always"/>
 
     <item
