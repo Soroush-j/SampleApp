@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.sjavaherian.myapp.task.ui.taskdetail.TaskDetailViewModel" />
+            type="com.example.sjavaherian.myapp.task.taskdetail.TaskDetailViewModel" />
 
     </data>
 
@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:id="@+id/task_detail_top"

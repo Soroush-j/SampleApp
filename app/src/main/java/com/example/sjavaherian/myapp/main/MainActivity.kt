@@ -2,12 +2,10 @@ package com.example.sjavaherian.myapp.main
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.ui.NavigationUI
 import com.example.sjavaherian.myapp.R
-import com.example.sjavaherian.myapp.task.ui.taskaddedit.AddEditTaskFragment
 import kotlinx.android.synthetic.main.main_activity.*
 
 class MainActivity : AppCompatActivity() {

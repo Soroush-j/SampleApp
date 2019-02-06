@@ -7,14 +7,14 @@
 
         <variable
             name="model"
-            type="com.example.sjavaherian.myapp.task.ui.taskaddedit.AddEditTaskViewModel" />
+            type="com.example.sjavaherian.myapp.task.taskaddedit.AddEditTaskViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        tools:context=".task.ui.taskaddedit.AddEditTaskFragment">
+        tools:context=".task.taskaddedit.AddEditTaskFragment">
 
         <include layout="@layout/app_toolbar" />
 
@@ -24,7 +24,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:padding="8dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
             <LinearLayout
                 android:id="@+id/title_container"

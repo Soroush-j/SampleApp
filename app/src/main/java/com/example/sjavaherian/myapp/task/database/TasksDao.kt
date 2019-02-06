@@ -45,6 +45,9 @@ interface TasksDao {
     @Query("SELECT * FROM tasks WHERE mId = :taskId LIMIT 1")
     fun getTaskById(taskId: String): Task
 
+    @Query("SELECT * FROM tasks WHERE title LIKE :query OR description LIKE :query ORDER BY mId")
+    fun getTaskByTitle(query: String): Flowable<List<Task>>
+
     /**
      * Insert a task in the database. If the task already exists, replace it.
      *

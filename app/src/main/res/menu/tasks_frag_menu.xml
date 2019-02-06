@@ -4,6 +4,11 @@
 
 
     <item
+        android:id="@+id/tasks_search_menu"
+        android:icon="@drawable/ic_search_24dp"
+        android:title="Search"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/tasks_filtering_menu"
         android:icon="@drawable/ic_filter_list_24dp"
         android:title="Filter"
@@ -12,17 +17,5 @@
         android:id="@+id/tasks_insert_fakes_menu"
         android:icon="@drawable/ic_add_24dp"
         android:title="Insert Fakes" />
-
-    <item android:id="@+id/tasks_search_menu"
-        android:icon="@drawable/ic_search_24dp"
-        android:title="Search"
-        app:showAsAction="always"/>
-
-    <item
-        android:id="@+id/tasks_refresh_menu"
-        android:icon="@drawable/ic_refresh_24dp"
-        android:title="Refresh"
-        app:showAsAction="ifRoom" />
-
 
 </menu>

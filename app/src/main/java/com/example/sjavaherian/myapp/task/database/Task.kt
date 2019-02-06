@@ -1,26 +1,24 @@
 package com.example.sjavaherian.myapp.task.database
 
-import android.arch.persistence.room.ColumnInfo
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Ignore
-import android.arch.persistence.room.PrimaryKey
+import android.arch.persistence.room.*
 import java.util.*
 
-@Entity(tableName = "tasks")
+@Entity(tableName = "tasks", indices = [Index(value = ["title", "description"])])
 data class Task(
 
-    @PrimaryKey
-    @ColumnInfo(name = "mId")
-    val id: String,
+        // TODO: fix mid later.
+        @PrimaryKey
+        @ColumnInfo(name = "mId")
+        val id: String,
 
-    @ColumnInfo(name = "title")
-    val title: String,
+        @ColumnInfo(name = "title")
+        val title: String,
 
-    @ColumnInfo(name = "description")
-    val description: String,
+        @ColumnInfo(name = "description")
+        val description: String,
 
-    @ColumnInfo(name = "active")
-    val isActive: Boolean
+        @ColumnInfo(name = "active")
+        val isActive: Boolean
 ) {
 
     fun isCompleted(): Boolean = !isActive
@@ -44,10 +42,10 @@ data class Task(
 
     @Ignore
     constructor(title: String, description: String, completed: Boolean) : this(
-        UUID.randomUUID().toString(),
-        title,
-        description,
-        completed
+            UUID.randomUUID().toString(),
+            title,
+            description,
+            completed
     )
 
 

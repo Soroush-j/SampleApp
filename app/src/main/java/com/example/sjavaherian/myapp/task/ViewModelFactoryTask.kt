@@ -4,9 +4,9 @@ import android.app.Application
 import android.arch.lifecycle.ViewModel
 import android.arch.lifecycle.ViewModelProvider
 import com.example.sjavaherian.myapp.task.database.TasksRepository
-import com.example.sjavaherian.myapp.task.ui.taskaddedit.AddEditTaskViewModel
-import com.example.sjavaherian.myapp.task.ui.taskdetail.TaskDetailViewModel
-import com.example.sjavaherian.myapp.task.ui.tasks.TasksViewModel
+import com.example.sjavaherian.myapp.task.taskaddedit.AddEditTaskViewModel
+import com.example.sjavaherian.myapp.task.taskdetail.TaskDetailViewModel
+import com.example.sjavaherian.myapp.task.tasks.TasksViewModel
 
 class ViewModelFactoryTask constructor(
     private val app: Application,

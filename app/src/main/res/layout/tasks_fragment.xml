@@ -8,7 +8,7 @@
 
         <variable
             name="model"
-            type="com.example.sjavaherian.myapp.task.ui.tasks.TasksViewModel" />
+            type="com.example.sjavaherian.myapp.task.tasks.TasksViewModel" />
     </data>
 
     <android.support.design.widget.CoordinatorLayout
@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:fitsSystemWindows="true"
         android:layout_height="match_parent"
-        tools:context=".task.ui.tasks.TasksFragment">
+        tools:context=".task.tasks.TasksFragment">
 
         <include layout="@layout/app_toolbar" />
 
@@ -26,7 +26,7 @@
             android:orientation="vertical"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            app:layout_behavior="android.support.design.widget.AppBarLayout$ScrollingViewBehavior">
 
             <TextView
                 android:layout_width="match_parent"

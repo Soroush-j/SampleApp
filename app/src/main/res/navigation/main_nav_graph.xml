@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/nav_movies_fragment">
+    app:startDestination="@id/nav_tasks_fragment">
 
     <fragment
         android:id="@+id/nav_movies_fragment"
@@ -16,7 +16,7 @@
             app:popUpTo="@+id/nav_movies_fragment" />
         <action
             android:id="@+id/action_movies_to_search"
-            app:destination="@id/nav_search_fragment" />
+            app:destination="@id/nav_search_movies_fragment" />
     </fragment>
 
     <fragment
@@ -32,7 +32,7 @@
 
     <fragment
         android:id="@+id/nav_task_detail_fragment"
-        android:name="com.example.sjavaherian.myapp.task.ui.taskdetail.TaskDetailFragment"
+        android:name="com.example.sjavaherian.myapp.task.taskdetail.TaskDetailFragment"
         android:label="Details"
         tools:layout="@layout/task_detail_frag">
         <action
@@ -47,7 +47,7 @@
 
     <fragment
         android:id="@+id/nav_tasks_fragment"
-        android:name="com.example.sjavaherian.myapp.task.ui.tasks.TasksFragment"
+        android:name="com.example.sjavaherian.myapp.task.tasks.TasksFragment"
         android:label="Tasks"
         tools:layout="@layout/tasks_fragment">
         <action
@@ -57,12 +57,15 @@
         <action
             android:id="@+id/action_tasks_to_add_edit_task"
             app:destination="@id/nav_add_edit_task_fragment" />
+        <action
+            android:id="@+id/action_nav_tasks_fragment_to_nav_search_tasks_fragment"
+            app:destination="@id/nav_search_tasks_fragment" />
 
     </fragment>
 
     <fragment
         android:id="@+id/nav_add_edit_task_fragment"
-        android:name="com.example.sjavaherian.myapp.task.ui.taskaddedit.AddEditTaskFragment"
+        android:name="com.example.sjavaherian.myapp.task.taskaddedit.AddEditTaskFragment"
         android:label="edit"
         tools:layout="@layout/add_edit_task_fragment">
         <argument
@@ -73,15 +76,24 @@
             android:id="@+id/action_add_edit_task_pop_tasks"
             app:popUpTo="@id/nav_tasks_fragment" />
     </fragment>
+
     <fragment
-        android:id="@+id/nav_search_fragment"
-        tools:layout="@layout/search_frag"
-        android:name="com.example.sjavaherian.myapp.search.SearchFragment"
-        android:label="SearchFragment" >
+        android:id="@+id/nav_search_movies_fragment"
+        android:name="com.example.sjavaherian.myapp.movie.search.SearchMovieFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/search_movies_fragment">
         <action
             android:id="@+id/action_search_to_movie_details"
             app:destination="@id/nav_movie_details_fragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/nav_search_tasks_fragment"
+        android:name="com.example.sjavaherian.myapp.task.search.SearchTasksFragment"
+        android:label="Search"
+        tools:layout="@layout/search_task_fragment" >
+        <action
+            android:id="@+id/action_nav_search_tasks_fragment_to_nav_task_detail_fragment"
+            app:destination="@id/nav_task_detail_fragment" />
+    </fragment>
 
 </navigation>
