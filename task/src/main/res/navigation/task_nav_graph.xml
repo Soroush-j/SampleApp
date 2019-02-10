@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_task_graph" app:startDestination="@id/nav_tasks_fragment">
+    <fragment
+            android:id="@+id/nav_tasks_fragment"
+            android:name="com.sjavaherian.task.main.TasksFragment"
+            android:label="Tasks"
+            tools:layout="@layout/tasks_fragment">
+        <action
+                android:id="@+id/action_tasks_to_task_detail"
+                app:destination="@id/nav_task_detail_fragment"
+                app:popUpTo="@+id/nav_tasks_fragment"/>
+        <action
+                android:id="@+id/action_tasks_to_add_edit_task"
+                app:destination="@id/nav_add_edit_task_fragment"/>
+        <action
+                android:id="@+id/action_nav_tasks_fragment_to_nav_search_tasks_fragment"
+                app:destination="@id/nav_search_tasks_fragment"/>
+
+    </fragment>
+
+    <fragment
+            android:id="@+id/nav_add_edit_task_fragment"
+            android:name="com.sjavaherian.task.addedit.AddEditTaskFragment"
+            android:label="edit"
+            tools:layout="@layout/add_edit_task_fragment">
+        <argument
+                android:name="id"
+                app:argType="string"
+                app:nullable="true"/>
+        <action
+                android:id="@+id/action_add_edit_task_pop_tasks"
+                app:popUpTo="@+id/nav_tasks_fragment"/>
+    </fragment>
+
+    <fragment
+
+            android:id="@+id/nav_search_tasks_fragment"
+            android:name="com.sjavaherian.task.search.SearchTasksFragment"
+            android:label="Search"
+            tools:layout="@layout/search_task_fragment">
+        <action
+                android:id="@+id/action_nav_search_tasks_fragment_to_nav_task_detail_fragment"
+                app:destination="@id/nav_task_detail_fragment"/>
+    </fragment>
+
+    <fragment
+            android:id="@+id/nav_task_detail_fragment"
+            android:name="com.sjavaherian.task.detail.TaskDetailFragment"
+            android:label="Details"
+            tools:layout="@layout/task_detail_frag">
+        <action
+                android:id="@+id/action_task_detail_to_add_edit_task"
+                app:destination="@id/nav_add_edit_task_fragment"
+                app:popUpTo="@+id/nav_task_detail_fragment"/>
+        <argument
+                android:name="id"
+                app:argType="string"
+                app:nullable="false"/>
+    </fragment>
+</navigation>

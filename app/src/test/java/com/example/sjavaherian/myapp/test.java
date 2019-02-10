@@ -1,6 +1,6 @@
 package com.example.sjavaherian.myapp;
 
-import com.example.sjavaherian.myapp.movie.movies.network.pojo.GenreRetro;
+import com.sjavaherian.movie.main.network.pojo.GenreRetro;
 import com.google.gson.Gson;
 import org.junit.Test;
 

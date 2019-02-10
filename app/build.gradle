@@ -4,17 +4,16 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "androidx.navigation.safeargs"
 
-apply from: '../core_dependencies.gradle'
 android {
-    compileSdkVersion versions.compileSdk
+    compileSdkVersion rootProject.ext.compileSdk
 
     defaultConfig {
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
+        minSdkVersion rootProject.ext.minSdk
+        targetSdkVersion rootProject.ext.targetSdk
         applicationId "com.example.sjavaherian.myapp"
 
-        versionCode versions.versionCode
-        versionName versions.versionName
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -31,15 +30,59 @@ android {
     dataBinding {
         enabled = true
     }
+
+
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+    implementation rootProject.ext.libraries.kotlin
+    implementation rootProject.ext.libraries.supportv7
+    implementation rootProject.ext.libraries.design
+    implementation rootProject.ext.libraries.supportv4
+    implementation rootProject.ext.libraries.recyclerview
+    implementation rootProject.ext.libraries.constraint
+
+    implementation rootProject.ext.libraries.room
+    implementation rootProject.ext.libraries.roomRx
+    kapt rootProject.ext.libraries.roomCompiler
+
+    implementation rootProject.ext.libraries.paging
+    implementation rootProject.ext.libraries.pagingRx
+
+    implementation rootProject.ext.libraries.lifecycle
+    implementation rootProject.ext.libraries.lifecycleJ8
+
+    implementation rootProject.ext.libraries.rxjava
+    implementation rootProject.ext.libraries.rxAndroid
+
+    implementation rootProject.ext.libraries.dagger
+    implementation rootProject.ext.libraries.daggerAndroid
+    implementation rootProject.ext.libraries.daggerSupport
+    kapt rootProject.ext.libraries.daggerCompiler
+    kapt rootProject.ext.libraries.daggerAndroidProcessor
+
+    implementation rootProject.ext.libraries.logger
+
+    implementation rootProject.ext.libraries.retrofit
+    implementation rootProject.ext.libraries.retrofitGson
+
+    implementation rootProject.ext.libraries.navigation
+    implementation rootProject.ext.libraries.navigationUi
+
+    implementation rootProject.ext.libraries.debugdb
+    implementation rootProject.ext.libraries.gson
+    implementation rootProject.ext.libraries.guava
+    implementation rootProject.ext.libraries.picasso
+    implementation rootProject.ext.libraries.stetho
+    implementation rootProject.ext.libraries.ankcCommon
+
+    testImplementation rootProject.ext.libraries.junit
+    androidTestImplementation rootProject.ext.libraries.testRunner
+    androidTestImplementation rootProject.ext.libraries.espressoCore
+
+    implementation project(path: ':task')
     implementation project(':core')
-
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    kapt "com.google.dagger:dagger-android-processor:${versions.dagger}"
-    kapt "com.google.dagger:dagger-compiler:${versions.dagger}"
-
-    //    implementation 'com.google.android.material:material:1.0.0'
+    implementation project(':movie')
 }

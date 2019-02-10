@@ -1,6 +1,6 @@
 package com.example.sjavaherian.myapp
 
-import com.example.sjavaherian.myapp.movie.database.Genre
+import com.sjavaherian.core.database.movies.Genre
 import org.junit.Test
 
 /**

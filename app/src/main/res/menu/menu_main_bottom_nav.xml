@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
+    <!--android:id="@+id/nav_tasks_fragment"-->
     <item
-        android:id="@+id/nav_tasks_fragment"
+        android:id="@+id/nav_task_graph"
         android:icon="@drawable/ic_edit_24dp"
         android:title="Tasks" />
 
     <item
-        android:id="@+id/nav_movies_fragment"
+        android:id="@+id/nav_movies_graph"
         android:icon="@drawable/ic_local_movies_24dp"
         android:title="Movies" />
 
