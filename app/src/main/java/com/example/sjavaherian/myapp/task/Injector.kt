@@ -12,25 +12,25 @@ import com.example.sjavaherian.myapp.task.tasks.TasksModule
 
 fun TasksFragment.inject() {
     MainApp.getTaskMainComponent(context?.applicationContext)
-            .addModule(TasksModule(this))
-            .inject(this)
+        .addModule(TasksModule(this))
+        .inject(this)
 }
 
 fun TaskDetailFragment.inject() {
     MainApp.getTaskMainComponent(context?.applicationContext)
-            .addModule(TaskDetailModule(this))
-            .inject(this)
+        .addModule(TaskDetailModule(this))
+        .inject(this)
 }
 
 fun AddEditTaskFragment.inject() {
     MainApp.getTaskMainComponent(context?.applicationContext)
-            .addModule(AddEditModule(this))
-            .inject(this)
+        .addModule(AddEditModule(this))
+        .inject(this)
 }
 
-fun SearchTasksFragment.inject(){
+fun SearchTasksFragment.inject() {
     MainApp.getTaskMainComponent(context?.applicationContext)
-            .addModule(SearchTasksModule())
-            .inject(this)
+        .addModule(SearchTasksModule())
+        .inject(this)
 
 }
